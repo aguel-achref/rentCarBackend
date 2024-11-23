@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 // Function to create a user
 export async function createUser(req, res) {
-  const { first_name, last_name, email, password } = req.body;
+  const { first_name, last_name, email, password,status } = req.body;
   const id = uuidv4();
 
   try {
@@ -32,6 +32,10 @@ export async function createUser(req, res) {
       });
     };
 
+    // Check status value
+    const validStatuses = ['ADMIN', 'CLIENT'];
+    const userStatus = status && validStatuses.includes(status.toUpperCase()) ? status.toUpperCase() : 'CLIENT';
+
     // Check if email already exists
     const [existingUser] = await db.promise().query(
       `SELECT * FROM users WHERE email = ?`,
@@ -42,8 +46,8 @@ export async function createUser(req, res) {
     };
   
     const [rows] = await db.promise().query(
-      `INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)`,
-      [id, first_name, last_name, email, hashedPassword]
+      `INSERT INTO users (id, first_name, last_name, email, password, status) VALUES (?, ?, ?, ?, ?, ?)`,
+      [id, first_name, last_name, email, hashedPassword, userStatus]
     );
 
     // Retrieve the user just created
