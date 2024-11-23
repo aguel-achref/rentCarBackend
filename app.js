@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv'; 
 import mysql from 'mysql2'; 
 import userRoutes from './routes/authentication.js'; 
+import carRoutes from './routes/car.js';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));  // Now you can safely 
 
 // Use the user routes for user-related API endpoints
 app.use('/api/users', userRoutes);
+app.use('/api/cars', carRoutes);
 
 // Create MySQL connection
 export const db = mysql.createConnection({
