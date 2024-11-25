@@ -3,15 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Function to create a user
 export async function createCar(req, res) {
-  const { name, agency_name, disponibility, price, description } = req.body;
+  const { name, agency_name, disponibility, price, caution, description } = req.body;
   const id = uuidv4();
 
   try {
     // Validate required fields
-    if (!name || !agency_name || disponibility === undefined || !price) {
+    if (!name || !agency_name ||!caution || disponibility === undefined || !price) {
       return res.status(400).json({ 
         success: false, 
-        message: 'Name, agency name, disponibility, and price are required.' 
+        message: 'Name, agency name, disponibility, caution and price are required.' 
       });
     }
 
@@ -20,8 +20,8 @@ export async function createCar(req, res) {
 
     // Insert data into the database
     const [result] = await db.promise().query(
-      'INSERT INTO cars (id, name, agency_name, disponibility, price, description) VALUES (?, ?, ?, ?, ?, ?)', 
-      [id, name, agency_name, valuesDisponibility, price, description]
+      'INSERT INTO cars (id, name, agency_name, disponibility, price, caution, description) VALUES (?,?, ?, ?, ?, ?, ?)', 
+      [id, name, agency_name, valuesDisponibility, price, caution, description]
     );
 
     if (result.affectedRows === 0) {
