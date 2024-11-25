@@ -9,7 +9,7 @@ export async function login(req, res) {
 
         // Check if user exists by email
         const [result] = await db.promise().query('SELECT * FROM users WHERE email = ?', [email]);
-        const user = result[0];
+        const user = result[0];        
 
         if (!user) {
             return res.status(404).json({ message: 'Email or password incorrect' });
@@ -19,10 +19,12 @@ export async function login(req, res) {
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Email or password incorrect' });
-        }
+        }        
 
         // Generate JWT token
         const token = generateToken(user.id);
+        console.log("token",token);
+        
 
         // Attach the token to the response
         res.status(200).json({
