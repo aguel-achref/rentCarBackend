@@ -5,6 +5,7 @@ import { editUser } from '../authentication/editUser.js';
 import { deleteUser } from '../authentication/deleteUser.js';
 import { getOneUser } from '../authentication/getOneUser.js';
 import { login } from '../authentication/login.js'; 
+import { authenticateToken } from '../utils/middlewares/auth.js';
 const router = express.Router(); 
 
 // Define the routes
