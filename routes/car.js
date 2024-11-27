@@ -7,6 +7,7 @@ import { getAllCars } from '../car/getAll.js';
 import { getAllDispoCars } from '../car/getAllDispoCars.js';
 import { reserverCar } from '../reservation/reserverCar.js';
 import { authenticateToken } from '../utils/middlewares/auth.js';
+import { searchCar } from '../search/searchCar.js';
 const router = express.Router(); 
 
 // Define the routes
@@ -17,6 +18,7 @@ router.get('/getOneCar/:id', getOneCar);
 router.get('/getAllCars', getAllCars);
 router.get('/getAllDispoCars', getAllDispoCars);
 router.post('/reserver/:id',authenticateToken, reserverCar);
+router.post('/searchCar', searchCar);
 
 
 
