@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Function to create a user
 export async function createCar(req, res) {
-  const { name, agency_name, disponibility, price, caution, description } = req.body;
+  const { name, agency_name, disponibility, price, caution, description, localisation } = req.body;
   const id = uuidv4();
 
   try {
@@ -20,8 +20,8 @@ export async function createCar(req, res) {
 
     // Insert data into the database
     const [result] = await db.promise().query(
-      'INSERT INTO cars (id, name, agency_name, disponibility, price, caution, description) VALUES (?,?, ?, ?, ?, ?, ?)', 
-      [id, name, agency_name, valuesDisponibility, price, caution, description]
+      'INSERT INTO cars (id, name, agency_name, disponibility, price, caution, description, localisation) VALUES (? ,?, ?, ?, ?, ?, ?, ?)', 
+      [id, name, agency_name, valuesDisponibility, price, caution, description, localisation]
     );
 
     if (result.affectedRows === 0) {
