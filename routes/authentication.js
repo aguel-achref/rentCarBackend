@@ -9,7 +9,7 @@ import { authenticateToken } from '../utils/middlewares/auth.js';
 const router = express.Router(); 
 
 // Define the routes
-router.post('/createUser', authenticateToken, createUser); 
+router.post('/createUser', createUser); 
 router.get('/getAllUsers', authenticateToken, getAllUsers); 
 router.get('/getOneUser/:id', authenticateToken, getOneUser);
 router.put('/editUser/:id', authenticateToken, editUser); 
