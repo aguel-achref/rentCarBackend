@@ -77,11 +77,28 @@ export async function createUser(req, res) {
       to: email,
       subject: 'Welcome to Our Platform!',
       html: `
-        <h1>Welcome, ${first_name}!</h1>
-        <p>Thank you for creating an account with us. Your account has been successfully created.</p>
-        <p>If you have any questions, feel free to reach out to our support team.</p>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f9f9f9; padding: 20px;">
+          <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <div style="background-color: #007bff; color: #ffffff; text-align: center; padding: 20px;">
+              <h1 style="margin: 0; font-size: 24px;">Welcome, ${first_name}!</h1>
+            </div>
+            <div style="padding: 20px;">
+              <p style="font-size: 16px;">Thank you for creating an account with <strong>Rent Car</strong>. Your account has been successfully created!</p>
+              <p style="font-size: 16px;">We're thrilled to have you on board. If you have any questions or need assistance, feel free to reach out to our support team.</p>
+              <p style="text-align: center; margin: 20px 0;">
+                <a href="#" style="display: inline-block; text-decoration: none; background-color: #007bff; color: #ffffff; padding: 10px 20px; border-radius: 5px; font-weight: bold;">Explore Now</a>
+              </p>
+              <p style="font-size: 14px; color: #555;">Thank you, <br>The Rent Car Team</p>
+            </div>
+            <div style="background-color: #f1f1f1; text-align: center; padding: 10px; font-size: 12px; color: #777;">
+              <p style="margin: 0;">This is an automated message, please do not reply.</p>
+              <p style="margin: 0;">&copy; ${new Date().getFullYear()} Rent Car. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
       `,
     });
+    
 
     transporter.verify(function (error, success) {
       if (error) {
